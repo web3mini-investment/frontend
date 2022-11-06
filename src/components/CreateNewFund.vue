@@ -5,34 +5,34 @@
     <div class="content">Order Expiration: </div><input class="date" type="date" v-model="orderExpiration_">
     <div class="content">Fund Maturity: </div><input class="date" type="date" v-model="maturity_">
     <button v-on:click="createNewFund">Create New Fund</button>
-    <div class="content">{{ result }}</div>
+    <div>RESULT={{publishedContractAddress}}</div>
 </template>
-  
+
 <script>
   import createNewFund from './smart-contracts/CreateNewFund'
-
   export default {
       name: 'Input',
       data () {
+          var today = new Date();
+          today.setMonth(today.getMonth() + 1);
           return {
-              underlyingAsset_: 'Please input the target address...',
-              offerClosingTime_: new Date().toISOString().slice(0,10),
-              orderExpiration_: new Date().toISOString().slice(0,10),
-              maturity_: new Date().toISOString().slice(0,10) ,
-              result: 'Initial Value'
+              underlyingAsset_: 'Please input the target adress...',
+              offerClosingTime_: today.toISOString().slice(0,10),
+              orderExpiration_: today.toISOString().slice(0,10),
+              maturity_: today.toISOString().slice(0,10),
+              publishedContractAddress: 'expression'
           }
       },
 
       methods: {
-          createNewFund () {
-              const result = createNewFund({
+          async createNewFund () {
+              const result = await createNewFund({
                   underlyingAsset: this.underlyingAsset_,
                   offerClosingTime: this.offerClosingTime_,
                   orderExpiration: this.orderExpiration_,
                   maturity: this.maturity_
-              })
-            
-              this.result = result
+              });
+              this.publishedContractAddress = result.contractAddress;
           }
 
           
