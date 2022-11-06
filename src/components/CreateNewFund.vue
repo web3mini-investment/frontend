@@ -1,6 +1,6 @@
 <template>
     <h1>Input Form</h1>
-    <div class="content">Target Token Adress: </div><input v-model="underlyingAsset_">
+    <div class="content">Target Token Address: </div><input v-model="underlyingAsset_">
     <div class="content">Offering Closing Time: </div><input class="date" type="date" v-model="offerClosingTime_">
     <div class="content">Order Expiration: </div><input class="date" type="date" v-model="orderExpiration_">
     <div class="content">Fund Maturity: </div><input class="date" type="date" v-model="maturity_">
