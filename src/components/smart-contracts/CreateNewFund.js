@@ -1,4 +1,4 @@
-const createNewFund = ({target, numberOfToken, fund_maturity, deadlineDate}) => {
+const createNewFund = ({underlyingAsset, offerClosingTime, orderExpiration, maturity}) => {
     // smart contractの処理書く
 
     return {}

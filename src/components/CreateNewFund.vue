@@ -1,8 +1,8 @@
 <template>
-    <div class="content">Target NFT: </div><input v-model="target">
-    <div class="content">Number Of Token: </div><input v-model="numberOfToken">
-    <div class="content">Fund Maturity: </div><input v-model="fund_maturity">
-    <div class="content">Deadline Date: </div><input v-model="deadlineDate">
+    <div class="content">Underlying Asset Adress: </div><input v-model="underlyingAsset_">
+    <div class="content">Offering Closing Time: </div><input v-model="offerClosingTime_">
+    <div class="content">Order Expiration: </div><input v-model="orderExpiration_">
+    <div class="content">Fund Maturity: </div><input v-model="maturity_">
     <button v-on:click="createNewFund">Create New Fund</button>
    
     <!-- <div id="sample">
@@ -17,20 +17,20 @@
         name: 'Input',
         data () {
             return {
-                target: 'NFT',
-                numberOfToken: 0,
-                fund_maturity: '20251106',
-                deadlineDate: '20221125'
+                underlyingAsset_: 'xxxxNFTxxxx',
+                offerClosingTime_: '20221125',
+                orderExpiration_: '20221106',
+                maturity_: '20251202'
             }
         },
 
         methods: {
             createNewFund () {
                 const {} = doCalc({
-                    target: this.target,
-                    numberOfToken: this.numberOfToken,
-                    fund_maturity: this.fund_maturity,
-                    deadlineDate: this.deadlineDate
+                    underlyingAsset: this.underlyingAsset_,
+                    offerClosingTime: this.offerClosingTime_,
+                    orderExpiration: this.orderExpiration_,
+                    maturity: this.maturity_
                 })
             }
         }
