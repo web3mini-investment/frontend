@@ -10,3 +10,26 @@ dFundでは、コミュニティ参加者の出資を元手として様々なト
     * 約定不成立：手数料を除いた出資金を返金し終了
 3. 取引期間：本ファンドのトークンを自由に取引
 4. 満期日：原資産を売却しファンドトークン数に応じて売却金を配分
+
+# 使用したtech stacks 
+* Vue.js
+* Azure static web app
+* Github actions
+* Solidity
+
+# 使用したBlockchain 
+* Ethereum(Goerli)
+
+# deployしたContract
+なし  
+(アプリケーション内で生成されるため)
+
+# application codeやその他のfile 
+* 本リポジトリ（https://github.com/web3mini-investment/frontend）
+* SmartContract開発用リポジトリ（https://github.com/web3mini-investment/contracts）
+
+# テスト手順を含むリポジトリへのリンク 
+本リポジトリ
+
+# 審査やテストのためにプロジェクトにアクセスする方法など
+https://yellow-tree-00aeb2f10.2.azurestaticapps.net/
