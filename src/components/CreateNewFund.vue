@@ -1,24 +1,25 @@
 <template>
     <h1>Input Form</h1>
-    <div class="content">Target Token Adress: </div><input v-model="underlyingAsset_">
+    <div class="content">Target Token Address: </div><input v-model="underlyingAsset_">
     <div class="content">Offering Closing Time: </div><input class="date" type="date" v-model="offerClosingTime_">
     <div class="content">Order Expiration: </div><input class="date" type="date" v-model="orderExpiration_">
     <div class="content">Fund Maturity: </div><input class="date" type="date" v-model="maturity_">
     <button v-on:click="createNewFund">Create New Fund</button>
     <div>RESULT={{publishedContractAddress}}</div>
 </template>
-  
-<script>
-  import createNewFund from './smart-contracts/CreateNewFund';
 
+<script>
+  import createNewFund from './smart-contracts/CreateNewFund'
   export default {
       name: 'Input',
       data () {
+          var today = new Date();
+          today.setMonth(today.getMonth() + 1);
           return {
               underlyingAsset_: 'Please input the target adress...',
-              offerClosingTime_: new Date().toISOString().slice(0,10),
-              orderExpiration_: new Date().toISOString().slice(0,10),
-              maturity_: new Date().toISOString().slice(0,10),
+              offerClosingTime_: today.toISOString().slice(0,10),
+              orderExpiration_: today.toISOString().slice(0,10),
+              maturity_: today.toISOString().slice(0,10),
               publishedContractAddress: 'expression'
           }
       },
@@ -33,6 +34,8 @@
               });
               this.publishedContractAddress = result.contractAddress;
           }
+
+          
       }
   }
 </script>

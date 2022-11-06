@@ -1,13 +1,13 @@
 <template>
   <div class="greetings">
     <h3>
-        Please contact the following Discord Adresses.
+        If you want to help, please contact the following Discord ids.
     </h3>
     <h3>
-          ・sugami: {Discord Adress}
+          ・sugami: sugaim#5835
     </h3>
     <h3>
-          ・M.Ishida: {Discord Adress}
+          ・M.Ishida: M.Ishida#9973
     </h3>
   </div>
 </template>
