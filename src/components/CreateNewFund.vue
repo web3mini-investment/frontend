@@ -5,7 +5,7 @@
     <div class="content">Order Expiration: </div><input class="date" type="date" v-model="orderExpiration_">
     <div class="content">Fund Maturity: </div><input class="date" type="date" v-model="maturity_">
     <button v-on:click="createNewFund">Create New Fund</button>
-    <div>RESULT={{publishedContractAddress}}</div>
+    <div class="result">Deploy Address = {{publishedContractAddress}}</div>
 </template>
 
 <script>
@@ -20,7 +20,7 @@
               offerClosingTime_: today.toISOString().slice(0,10),
               orderExpiration_: today.toISOString().slice(0,10),
               maturity_: today.toISOString().slice(0,10),
-              publishedContractAddress: 'expression'
+              publishedContractAddress: 'NONE'
           }
       },
 
@@ -54,6 +54,14 @@
     width: 40%;
     font-size: large;
     text-align: right;
+  }
+  div.result {
+    background-color: #eee;
+    display: inline-block;
+    margin: 10px;
+    width: 90%;
+    font-size: medium;
+    text-align: left;
   }
 
   input {

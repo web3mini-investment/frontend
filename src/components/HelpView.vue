@@ -4,7 +4,7 @@
         If you want to help, please contact the following Discord ids.
     </h3>
     <h3>
-          ・sugami: sugaim#5835
+          ・sugaim: sugaim#5835
     </h3>
     <h3>
           ・M.Ishida: M.Ishida#9973
