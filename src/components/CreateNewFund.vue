@@ -5,9 +5,11 @@
     <div class="content">Order Expiration: </div><input class="date" type="date" v-model="orderExpiration_">
     <div class="content">Fund Maturity: </div><input class="date" type="date" v-model="maturity_">
     <button v-on:click="createNewFund">Create New Fund</button>
+    <div class="content">{{ result }}</div>
 </template>
   
 <script>
+  import createNewFund from './smart-contracts/CreateNewFund'
 
   export default {
       name: 'Input',
@@ -16,19 +18,24 @@
               underlyingAsset_: 'Please input the target adress...',
               offerClosingTime_: new Date().toISOString().slice(0,10),
               orderExpiration_: new Date().toISOString().slice(0,10),
-              maturity_: new Date().toISOString().slice(0,10) 
+              maturity_: new Date().toISOString().slice(0,10) ,
+              result: 'Initial Value'
           }
       },
 
       methods: {
           createNewFund () {
-              const {} = doCalc({
+              const result = createNewFund({
                   underlyingAsset: this.underlyingAsset_,
                   offerClosingTime: this.offerClosingTime_,
                   orderExpiration: this.orderExpiration_,
                   maturity: this.maturity_
               })
+            
+              this.result = result
           }
+
+          
       }
   }
 </script>
