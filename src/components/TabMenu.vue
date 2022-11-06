@@ -1,16 +1,16 @@
 <template>
-    <div>
-      <ol>
-        <li v-for="(item, index) in items" :key=index>
-           <router-link v-bind:to=item.path>
-              {{ item.title }}
-           </router-link>
-        </li>
-      </ol>
-    </div>
-  </template>
+  <div>
+    <ol>
+      <li v-for="(item, index) in items" :key=index>
+        <router-link v-bind:to=item.path>
+          {{ item.title }}
+        </router-link>
+      </li>
+    </ol>
+  </div>
+</template>
   
-  <script>
+<script>
   export default {
     name: 'TabMenu',
     data () {
@@ -23,9 +23,9 @@
       }
     }
   }
-  </script>
+ </script>
   
-  <style scoped>
+<style scoped>
   
   ol {
     margin-left: auto;
@@ -64,4 +64,4 @@
     line-height: 50px;
   }
   
-  </style>
+</style>

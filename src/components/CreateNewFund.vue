@@ -1,36 +1,36 @@
 <template>
     <h1>Input Form</h1>
-    <div class="content">Underlying Asset Adress: </div><input v-model="underlyingAsset_">
-    <div class="content">Offering Closing Time: </div><input v-model="offerClosingTime_">
-    <div class="content">Order Expiration: </div><input v-model="orderExpiration_">
-    <div class="content">Fund Maturity: </div><input v-model="maturity_">
+    <div class="content">Target Token Adress: </div><input v-model="underlyingAsset_">
+    <div class="content">Offering Closing Time: </div><input class="date" type="date" v-model="offerClosingTime_">
+    <div class="content">Order Expiration: </div><input class="date" type="date" v-model="orderExpiration_">
+    <div class="content">Fund Maturity: </div><input class="date" type="date" v-model="maturity_">
     <button v-on:click="createNewFund">Create New Fund</button>
 </template>
   
 <script>
 
-    export default {
-        name: 'Input',
-        data () {
-            return {
-                underlyingAsset_: 'xxxxNFTxxxx',
-                offerClosingTime_: '20221125',
-                orderExpiration_: '20221106',
-                maturity_: '20251202'
-            }
-        },
+  export default {
+      name: 'Input',
+      data () {
+          return {
+              underlyingAsset_: 'Please input the target adress...',
+              offerClosingTime_: new Date().toISOString().slice(0,10),
+              orderExpiration_: new Date().toISOString().slice(0,10),
+              maturity_: new Date().toISOString().slice(0,10) 
+          }
+      },
 
-        methods: {
-            createNewFund () {
-                const {} = doCalc({
-                    underlyingAsset: this.underlyingAsset_,
-                    offerClosingTime: this.offerClosingTime_,
-                    orderExpiration: this.orderExpiration_,
-                    maturity: this.maturity_
-                })
-            }
-        }
-    }
+      methods: {
+          createNewFund () {
+              const {} = doCalc({
+                  underlyingAsset: this.underlyingAsset_,
+                  offerClosingTime: this.offerClosingTime_,
+                  orderExpiration: this.orderExpiration_,
+                  maturity: this.maturity_
+              })
+          }
+      }
+  }
 </script>
   
   <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -51,16 +51,25 @@
 
   input {
     margin: 10px;
-    width: 30%;
-    font-size: large;
+    width: 50%;
+    font-size: medium;
     text-align: left;
+  }
+
+  input.date {
+    margin: 10px;
+    width: 50%;
+    font-size: large;
+    text-align: right;
   }
   
   h1 {
     font-weight: 300;
     font-size: 2.0rem;
     top: 10px;
+    bottom: 20px;
     text-align: left;
+    text-decoration: underline;
   }
 
   h3 {
@@ -78,6 +87,7 @@
     border-radius: 10px;
     position: relative;
     top: 10px;
+    bottom: 20px;
     display: flex;
     justify-content: space-around;
     align-items: center;

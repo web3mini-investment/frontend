@@ -1,21 +1,10 @@
 <script setup>
-import TitleView from './components/TitleView.vue'
-import FundList from './components/FundList.vue'
+  import TitleView from './components/TitleView.vue'
+  import FundList from './components/FundList.vue'
+  import TabMenu from './components/TabMenu.vue'
 </script>
 
-<script>
-import TabMenu from './components/TabMenu.vue'
-
-export default {
-  name: 'App',
-  components: {
-    TabMenu
-  }
-}
-</script>
-  
 <template>
-
   <header>
     <img alt="dFund logo" class="logo" src="./assets/logo.svg" width="250" height="250" />
 
@@ -24,7 +13,7 @@ export default {
     </div>
 
     <div id="tab">
-      <tab-menu></tab-menu>
+      <TabMenu/>
       <router-view/>
     </div>
   </header>
@@ -32,7 +21,6 @@ export default {
   <main>
     <FundList />
   </main>
-
 </template>
 
 <style scoped>
