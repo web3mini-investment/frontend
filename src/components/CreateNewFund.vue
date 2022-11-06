@@ -1,14 +1,10 @@
 <template>
+    <h1>Input Form</h1>
     <div class="content">Underlying Asset Adress: </div><input v-model="underlyingAsset_">
     <div class="content">Offering Closing Time: </div><input v-model="offerClosingTime_">
     <div class="content">Order Expiration: </div><input v-model="orderExpiration_">
     <div class="content">Fund Maturity: </div><input v-model="maturity_">
     <button v-on:click="createNewFund">Create New Fund</button>
-   
-    <!-- <div id="sample">
-        <input type="number" v-model="x"> + <input type="number" v-model="y"> = {{result}}
-        <button v-on:click="calc">計算</button>
-    </div> -->
 </template>
   
 <script>
@@ -35,30 +31,6 @@
             }
         }
     }
-
-//    import doCalc from "./smart-contracts/sample.js"
-
-//    export default {
-//         name: 'sample',
-//         data () {
-//             return {
-//                 x: 0,
-//                 y: 0,
-//                 result: 0
-//             }
-//         },
-
-//         methods: {
-//             calc () {
-//                 const {result} = doCalc({
-//                     x: this.x,
-//                     y: this.y
-//                 })
-
-//                 this.result = result
-//             }
-//         }
-//    }
 </script>
   
   <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -72,7 +44,7 @@
     background-color: #eee;
     display: inline-block;
     margin: 10px;
-    width: 30%;
+    width: 40%;
     font-size: large;
     text-align: right;
   }
@@ -84,6 +56,13 @@
     text-align: left;
   }
   
+  h1 {
+    font-weight: 300;
+    font-size: 2.0rem;
+    top: 10px;
+    text-align: left;
+  }
+
   h3 {
     color: white;
   }
@@ -96,8 +75,9 @@
   
   button {
     background: #eee;
-    border-radius: 3px;
+    border-radius: 10px;
     position: relative;
+    top: 10px;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -106,7 +86,7 @@
     padding: 10px 25px;
     color: #313131;
     transition: 0.3s ease-in-out;
-    font-weight: 500;
+    font-weight: 800;
   }
 
   button:hover {
