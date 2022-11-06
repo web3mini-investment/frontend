@@ -30,6 +30,9 @@ dFundでは、コミュニティ参加者の出資を元手として様々なト
 
 # テスト手順を含むリポジトリへのリンク 
 本リポジトリ
+https://github.com/web3mini-investment/frontend/blob/main/TokyoWeb3Hackathon_dFund_テスト手順.pdf
 
 # 審査やテストのためにプロジェクトにアクセスする方法など
-https://yellow-tree-00aeb2f10.2.azurestaticapps.net/
+* アプリケーション：https://yellow-tree-00aeb2f10.2.azurestaticapps.net/
+* 本リポジトリ：https://github.com/web3mini-investment/frontend
+* コンセプト：https://github.com/web3mini-investment/frontend/blob/main/TokyoWeb3Hackathon_dFund_Concept.pdf
