@@ -1,29 +1,12 @@
-# vue-project
+# Overview
+“dFund”は、NFTやSTOに対して、中央管理者を介在しない集団投資スキーム(ファンド)を提供します。  
+従来のファンドは販売会社、委託会社、信託会社といった機能毎に機関が分かれているスキームが多く、多額の手数料が発生する、各機能が各金融機関で集中的に管理されているといった課題があります。  
+dFundでは、コミュニティ参加者の出資を元手として様々なトークンに投資するファンドを組成するスキームをスマートコントラクト上に実装することで、上記の課題解決を目指します。
+ファンドの組成を希望するコミュニティ参加者が予め投資対象（原資産）、募集期間、買付期間、満期日を設定し、以下のライフサイクルに従って自動でファンドを運用します。
 
-This template should help get you started developing with Vue 3 in Vite.
-
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
+1. 募集期間：出資者を募集
+2. 買付期間：出資金をもとに原資産の買付を実施
+    * 約定成立：本ファンドのトークンを新規に発行し、出資額に応じて配分
+    * 約定不成立：手数料を除いた出資金を返金し終了
+3. 取引期間：本ファンドのトークンを自由に取引
+4. 満期日：原資産を売却しファンドトークン数に応じて売却金を配分
