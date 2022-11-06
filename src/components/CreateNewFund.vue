@@ -15,7 +15,7 @@
       name: 'Input',
       data () {
           return {
-              underlyingAsset_: 'Please input the target adress...',
+              underlyingAsset_: 'Please input the target address...',
               offerClosingTime_: new Date().toISOString().slice(0,10),
               orderExpiration_: new Date().toISOString().slice(0,10),
               maturity_: new Date().toISOString().slice(0,10) ,
