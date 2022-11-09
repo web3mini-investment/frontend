@@ -1,11 +1,16 @@
 <template>
     <h1>Input Form</h1>
+    <div class="content">Fund Name: </div><input v-model="fundName_">
     <div class="content">Target Token Address: </div><input v-model="underlyingAsset_">
     <div class="content">Offering Closing Time: </div><input class="date" type="date" v-model="offerClosingTime_">
     <div class="content">Order Expiration: </div><input class="date" type="date" v-model="orderExpiration_">
     <div class="content">Fund Maturity: </div><input class="date" type="date" v-model="maturity_">
     <button v-on:click="createNewFund">Create New Fund</button>
-    <div class="result">Deploy Address = {{publishedContractAddress}}</div>
+    <div class="result">Deploy Address = <span>
+      <a v-if="existsContractAddress" :href="etherScanAddress" target="_blank">{{publishedContractAddress}}</a>
+      <span v-else>NONE</span>
+    </span></div>
+    <div v-if="exitsErrMsg" class="result">Error Message = {{errMsg}}</div>
 </template>
 
 <script>
@@ -16,23 +21,45 @@
           var today = new Date();
           today.setMonth(today.getMonth() + 1);
           return {
+              fundName_: 'MyFund',
               underlyingAsset_: 'Please input the target adress...',
               offerClosingTime_: today.toISOString().slice(0,10),
               orderExpiration_: today.toISOString().slice(0,10),
               maturity_: today.toISOString().slice(0,10),
-              publishedContractAddress: 'NONE'
+              publishedContractAddress: null,
+              errMsg: null
           }
+      },
+
+      computed: {
+        exitsErrMsg: function () {
+          return this.errMsg !== null;
+        },
+        existsContractAddress: function () {
+          return this.publishedContractAddress !== null;
+        },
+        etherScanAddress: function () {
+          return this.publishedContractAddress === null 
+            ? ''
+            : `https://goerli.etherscan.io/address/${this.publishedContractAddress}`
+        }
       },
 
       methods: {
           async createNewFund () {
               const result = await createNewFund({
+                  fundName: this.fundName_,
                   underlyingAsset: this.underlyingAsset_,
                   offerClosingTime: this.offerClosingTime_,
                   orderExpiration: this.orderExpiration_,
                   maturity: this.maturity_
               });
-              this.publishedContractAddress = result.contractAddress;
+              if (result.success) {
+                this.publishedContractAddress = result.contractAddress;
+              }
+              else {
+                this.errMsg = result.message;
+              }
           }
 
           
