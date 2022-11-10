@@ -5,71 +5,81 @@
     <div class="content">Offering Closing Time: </div><input class="date" type="date" v-model="offerClosingTime_">
     <div class="content">Order Expiration: </div><input class="date" type="date" v-model="orderExpiration_">
     <div class="content">Fund Maturity: </div><input class="date" type="date" v-model="maturity_">
-    <button v-on:click="createNewFund">Create New Fund</button>
-    <div class="result">Deploy Address = <span>
-      <a v-if="existsContractAddress" :href="etherScanAddress" target="_blank">{{publishedContractAddress}}</a>
-      <span v-else>NONE</span>
-    </span></div>
-    <div v-if="exitsErrMsg" class="result">Error Message = {{errMsg}}</div>
+    <button id="create-button" v-on:click="createNewFund">Create New Fund</button>
 </template>
 
 <script>
+  import Swal from 'sweetalert2';
   import createNewFund from './smart-contracts/CreateNewFund'
+  
   export default {
-      name: 'Input',
-      data () {
-          var today = new Date();
-          today.setMonth(today.getMonth() + 1);
-          return {
-              fundName_: 'MyFund',
-              underlyingAsset_: 'Please input the target adress...',
-              offerClosingTime_: today.toISOString().slice(0,10),
-              orderExpiration_: today.toISOString().slice(0,10),
-              maturity_: today.toISOString().slice(0,10),
-              publishedContractAddress: null,
-              errMsg: null
-          }
-      },
-
-      computed: {
-        exitsErrMsg: function () {
-          return this.errMsg !== null;
-        },
-        existsContractAddress: function () {
-          return this.publishedContractAddress !== null;
-        },
-        etherScanAddress: function () {
-          return this.publishedContractAddress === null 
-            ? ''
-            : `https://goerli.etherscan.io/address/${this.publishedContractAddress}`
-        }
-      },
-
-      methods: {
-          async createNewFund () {
-              const result = await createNewFund({
-                  fundName: this.fundName_,
-                  underlyingAsset: this.underlyingAsset_,
-                  offerClosingTime: this.offerClosingTime_,
-                  orderExpiration: this.orderExpiration_,
-                  maturity: this.maturity_
-              });
-              if (result.success) {
-                this.publishedContractAddress = result.contractAddress;
-              }
-              else {
-                this.errMsg = result.message;
-              }
-          }
-
-          
+    name: 'Input',
+    data () {
+      var today = new Date();
+      today.setMonth(today.getMonth() + 1);
+      return {
+        fundName_: 'MyFund',
+        underlyingAsset_: 'Please input the target adress...',
+        offerClosingTime_: today.toISOString().slice(0,10),
+        orderExpiration_: today.toISOString().slice(0,10),
+        maturity_: today.toISOString().slice(0,10),
       }
+    },
+
+    methods: {
+      async createNewFund () {
+        Swal.fire({
+          title: 'Deploying',
+          html: `Deploying '${this.fundName_}'...`,
+          allowOutsideClick : false,
+          showConfirmButton: false,
+        })
+        Swal.showLoading();
+
+        // deploying
+        const result = await createNewFund({
+          fundName: this.fundName_,
+          underlyingAsset: this.underlyingAsset_,
+          offerClosingTime: this.offerClosingTime_,
+          orderExpiration: this.orderExpiration_,
+          maturity: this.maturity_
+        });
+        var popupSetting = undefined;
+        if (result.success) {
+          const url = `https://goerli.etherscan.io/address/${result.contractAddress}`;
+          popupSetting = {
+            title: `'${this.fundName_}' is created!`,
+            icon: 'success',
+            html: `<a href=${url} target="_blank">${result.contractAddress}<a/>`
+          };
+        }
+        else {
+          popupSetting = {
+            title: `Fail to create '${this.fundName_}'...`,
+            icon: 'error',
+            html: result.message
+          };
+        }
+        Swal.fire({
+          title: popupSetting.title,
+          icon: popupSetting.icon,
+          html: popupSetting.html,
+          showCloseButton: false,
+          allowOutsideClick: false,
+          allowEscapeKey: true,
+        })
+      }
+
+        
+    }
   }
 </script>
   
   <!-- Add "scoped" attribute to limit CSS to this component only -->
   <style scoped>
-  
+  div.spinner {
+    position: fixed !important;
+  }  
   div.output {
     text-align: center;
   }

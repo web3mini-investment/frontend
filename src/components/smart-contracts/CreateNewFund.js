@@ -1,6 +1,7 @@
 import * as ethers from 'ethers';
 import contractData from './contracts/CollectiveInvestmentSchemeV2.json';
 import { loadSigner } from './loadFund';
+import Swal from 'sweetalert2';
 
 function solDateConversion(date) {
   if (date instanceof Date) {
@@ -25,20 +26,28 @@ const createNewFund = async ({fundName, underlyingAsset, offerClosingTime, order
       console.log(`offerClosingTime: .js=${offerClosingTime}, .sol=${solDateConversion(offerClosingTime)}`);
       console.log(`orderExpiration: .js=${orderExpiration}, .sol=${solDateConversion(orderExpiration)}`);
       console.log(`maturity: .js=${maturity}, .sol=${solDateConversion(maturity)}`);
-      const contract = await factory.deploy(
-        ethers.utils.getAddress(WETH9),
-        ethers.utils.getAddress(underlyingAsset),
-        solDateConversion(offerClosingTime),
-        solDateConversion(orderExpiration),
-        solDateConversion(maturity),
-        fundName,
-        'DFN'
-      );
-  
-      console.log(`Contract address: ${contract.address}`);
+      var thrownContract = undefined;
+      try {
+        thrownContract = await factory.deploy(
+          ethers.utils.getAddress(WETH9),
+          ethers.utils.getAddress(underlyingAsset),
+          solDateConversion(offerClosingTime),
+          solDateConversion(orderExpiration),
+          solDateConversion(maturity),
+          fundName,
+          'DFN'
+        );
+      }
+      catch (err) {
+        console.error(err.message);
+        throw new Error(`Deploying '${fundName}' is cancelled`);
+      }
+      
+      const deployedContract = await thrownContract.deployed();
+      console.log(`Contract address: ${deployedContract.address}`);
       return {
         success: true,
-        contractAddress: contract.address
+        contractAddress: deployedContract.address
       };
     }
     catch (err) {
