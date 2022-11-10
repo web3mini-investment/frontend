@@ -9,8 +9,9 @@
 </template>
 
 <script>
+  import { loadSigner } from './smart-contracts/loadFund';
   import Swal from 'sweetalert2';
-  import createNewFund from './smart-contracts/CreateNewFund'
+  import {createNewFund, createNewFundByForms} from './smart-contracts/CreateNewFund'
   
   export default {
     name: 'Input',
@@ -28,58 +29,14 @@
 
     methods: {
       async createNewFund () {
-        Swal.fire({
-          title: 'Deploying',
-          html: `Deploying '${this.fundName_}'...`,
-          allowOutsideClick : false,
-          showConfirmButton: false,
-        })
-        Swal.showLoading();
-
-        // deploying
-        const result = await createNewFund({
-          fundName: this.fundName_,
-          underlyingAsset: this.underlyingAsset_,
-          offerClosingTime: this.offerClosingTime_,
-          orderExpiration: this.orderExpiration_,
-          maturity: this.maturity_
-        });
-        var popupSetting = undefined;
-        if (result.success) {
-          const url = `https://goerli.etherscan.io/address/${result.contractAddress}`;
-          popupSetting = {
-            title: `'${this.fundName_}' is created!`,
-            icon: 'success',
-            html: `<a href=${url} target="_blank">${result.contractAddress}<a/>`
-          };
-        }
-        else {
-          popupSetting = {
-            title: `Fail to create '${this.fundName_}'...`,
-            icon: 'error',
-            html: result.message
-          };
-        }
-        Swal.fire({
-          title: popupSetting.title,
-          icon: popupSetting.icon,
-          html: popupSetting.html,
-          showCloseButton: false,
-          allowOutsideClick: false,
-          allowEscapeKey: true,
-        })
+        await createNewFundByForms();
       }
-
-        
     }
   }
 </script>
   
   <!-- Add "scoped" attribute to limit CSS to this component only -->
   <style scoped>
-  div.spinner {
-    position: fixed !important;
-  }  
   div.output {
     text-align: center;
   }
@@ -92,6 +49,14 @@
     font-size: large;
     text-align: right;
   }
+  th.content2 {
+    background-color: #eee;
+    display: inline-block;
+    margin: 10px;
+    width: 40%;
+    font-size: medium;
+    text-align: right;
+  }  
   div.result {
     background-color: #eee;
     display: inline-block;

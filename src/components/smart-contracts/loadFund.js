@@ -26,8 +26,15 @@ export const loadSigner = async () => {
   return signer;
 }
 
-export const loadFund = async ({fundAddress}) => {
+export const loadFund = async (fundAddress) => {
   const signer = await loadSigner();
   const contract = new ethers.Contract(fundAddress, contractData.abi, signer);
   return contract;
+}
+
+export const loadSignerAndFund = async (fundAddress) => {
+  console.log(`Try to load fund ${fundAddress}...`);
+  const signer = await loadSigner();
+  const contract = new ethers.Contract(fundAddress, contractData.abi, signer);
+  return {signer, contract};
 }
