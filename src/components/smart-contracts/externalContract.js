@@ -3,7 +3,7 @@ import contractData from './contracts/DummyDFundToken.json';
 import { loadSigner } from './loadFund';
 
 export const paymentTokenAddress = () => {
-    return '0x5386ad660F2aA70481184423bc817C361851b2E4';
+    return '0x1d2A7DeDCeadfF1dfc0543e7FaA558D32E958c66';
 }
 
 export const loadPaymentTokenContract = async () => {
