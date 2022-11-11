@@ -1,48 +1,42 @@
 <template>
     <h1>Input Form</h1>
+    <div class="content">Fund Name: </div><input v-model="fundName_">
     <div class="content">Target Token Address: </div><input v-model="underlyingAsset_">
     <div class="content">Offering Closing Time: </div><input class="date" type="date" v-model="offerClosingTime_">
     <div class="content">Order Expiration: </div><input class="date" type="date" v-model="orderExpiration_">
     <div class="content">Fund Maturity: </div><input class="date" type="date" v-model="maturity_">
-    <button v-on:click="createNewFund">Create New Fund</button>
-    <div class="result">Deploy Address = {{publishedContractAddress}}</div>
+    <button id="create-button" v-on:click="createNewFund">Create New Fund</button>
 </template>
 
 <script>
-  import createNewFund from './smart-contracts/CreateNewFund'
+  import { loadSigner } from './smart-contracts/loadFund';
+  import Swal from 'sweetalert2';
+  import {createNewFund, createNewFundByForms} from './smart-contracts/CreateNewFund'
+  
   export default {
-      name: 'Input',
-      data () {
-          var today = new Date();
-          today.setMonth(today.getMonth() + 1);
-          return {
-              underlyingAsset_: 'Please input the target adress...',
-              offerClosingTime_: today.toISOString().slice(0,10),
-              orderExpiration_: today.toISOString().slice(0,10),
-              maturity_: today.toISOString().slice(0,10),
-              publishedContractAddress: 'NONE'
-          }
-      },
-
-      methods: {
-          async createNewFund () {
-              const result = await createNewFund({
-                  underlyingAsset: this.underlyingAsset_,
-                  offerClosingTime: this.offerClosingTime_,
-                  orderExpiration: this.orderExpiration_,
-                  maturity: this.maturity_
-              });
-              this.publishedContractAddress = result.contractAddress;
-          }
-
-          
+    name: 'Input',
+    data () {
+      var today = new Date();
+      today.setMonth(today.getMonth() + 1);
+      return {
+        fundName_: 'MyFund',
+        underlyingAsset_: 'Please input the target adress...',
+        offerClosingTime_: today.toISOString().slice(0,10),
+        orderExpiration_: today.toISOString().slice(0,10),
+        maturity_: today.toISOString().slice(0,10),
       }
+    },
+
+    methods: {
+      async createNewFund () {
+        await createNewFundByForms();
+      }
+    }
   }
 </script>
   
   <!-- Add "scoped" attribute to limit CSS to this component only -->
   <style scoped>
-  
   div.output {
     text-align: center;
   }
@@ -55,6 +49,14 @@
     font-size: large;
     text-align: right;
   }
+  th.content2 {
+    background-color: #eee;
+    display: inline-block;
+    margin: 10px;
+    width: 40%;
+    font-size: medium;
+    text-align: right;
+  }  
   div.result {
     background-color: #eee;
     display: inline-block;

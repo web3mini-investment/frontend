@@ -9,7 +9,7 @@
     <img alt="dFund logo" class="logo" src="./assets/logo.svg" width="250" height="250" />
 
     <div class="wrapper">
-      <TitleView msg="Welcome to the dFund!" name="sugami and M.Ishida"/>
+      <TitleView msg="Welcome to the dFund!" name="sugaim and M.Ishida"/>
     </div>
 
     <div id="tab">
